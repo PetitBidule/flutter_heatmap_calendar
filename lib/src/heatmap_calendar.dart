@@ -59,6 +59,9 @@ class HeatMapCalendar extends StatefulWidget {
   /// Default value is [ColorMode.opacity].
   final ColorMode colorMode;
 
+  /// The color value of the current day of every blocks
+  final Color? currentDayColor;
+
   /// Function that will be called when a block is clicked.
   ///
   /// Paratmeter gives clicked [DateTime] value.
@@ -96,6 +99,7 @@ class HeatMapCalendar extends StatefulWidget {
     this.initDate,
     this.size = 42,
     this.fontSize,
+    this.currentDayColor,
     this.monthFontSize,
     this.textColor,
     this.weekFontSize,
@@ -123,7 +127,7 @@ class _HeatMapCalendar extends State<HeatMapCalendar> {
   void initState() {
     super.initState();
     setState(() {
-      // Set _currentDate value to first day of initialized date or
+      // Set _currentDate value to first  day of initialized date or
       // today's month if widget.initDate is null.
       _currentDate =
           DateUtil.startDayOfMonth(widget.initDate ?? DateTime.now());
@@ -144,31 +148,47 @@ class _HeatMapCalendar extends State<HeatMapCalendar> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         // Previous month button.
-        IconButton(
-          icon: const Icon(
-            Icons.arrow_back_ios,
-            size: 14,
+        Container(
+          alignment: Alignment.center,
+          width: 34,
+          height: 34,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: Colors.grey[400]!, width: 1),
           ),
-          onPressed: () => changeMonth(-1),
+          child: IconButton(
+            icon: const Icon(
+              Icons.arrow_back_ios,
+              size: 14,
+            ),
+            onPressed: () => changeMonth(-1),
+          ),
         ),
 
         // Text which shows the current year and month
         Text(
-          DateUtil.MONTH_LABEL[_currentDate?.month ?? 0] +
-              ' ' +
-              (_currentDate?.year).toString(),
+          '${DateUtil.MONTH_LABEL[_currentDate?.month ?? 0]} ${_currentDate?.year}',
           style: TextStyle(
             fontSize: widget.monthFontSize ?? 12,
           ),
         ),
 
         // Next month button.
-        IconButton(
-          icon: const Icon(
-            Icons.arrow_forward_ios,
-            size: 14,
+        Container(
+          width: 34,
+          height: 34,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12),
+            // color: Colors.grey[300],
+            border: Border.all(color: Colors.grey[400]!, width: 1),
           ),
-          onPressed: () => changeMonth(1),
+          child: IconButton(
+            icon: const Icon(
+              Icons.arrow_forward_ios,
+              size: 14,
+            ),
+            onPressed: () => changeMonth(1),
+          ),
         ),
       ],
     );
@@ -216,6 +236,7 @@ class _HeatMapCalendar extends State<HeatMapCalendar> {
           _header(),
           _weekLabel(),
           HeatMapCalendarPage(
+            currentDayColor: widget.currentDayColor,
             baseDate: _currentDate ?? DateTime.now(),
             colorMode: widget.colorMode,
             flexible: widget.flexible,

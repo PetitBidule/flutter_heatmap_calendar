@@ -35,6 +35,9 @@ class HeatMapCalendarPage extends StatelessWidget {
   /// The text color value of every blocks
   final Color? textColor;
 
+  /// The color value of the current day of every blocks
+  final Color? currentDayColor;
+
   /// ColorMode changes the color mode of blocks.
   ///
   /// [ColorMode.opacity] requires just one colorsets value and changes color
@@ -68,6 +71,7 @@ class HeatMapCalendarPage extends StatelessWidget {
     this.flexible,
     this.size,
     this.fontSize,
+    this.currentDayColor,
     this.defaultColor,
     this.textColor,
     this.margin,
@@ -75,7 +79,7 @@ class HeatMapCalendarPage extends StatelessWidget {
     this.colorsets,
     this.borderRadius,
     this.onClick,
-  })  : separatedDate = DateUtil.separatedMonth(baseDate),
+  })  : separatedDate = DateUtil.separatedMonthFixed(baseDate),
         maxValue = DatasetsUtil.getMaxValue(
             DatasetsUtil.filterMonth(datasets, baseDate)),
         super(key: key);
@@ -89,10 +93,12 @@ class HeatMapCalendarPage extends StatelessWidget {
           HeatMapCalendarRow(
             startDate: date.keys.first,
             endDate: date.values.first,
+            baseMonth: baseDate,
             colorMode: colorMode,
             size: size,
             fontSize: fontSize,
             defaultColor: defaultColor,
+            currentDayColor: currentDayColor,
             colorsets: colorsets,
             textColor: textColor,
             borderRadius: borderRadius,

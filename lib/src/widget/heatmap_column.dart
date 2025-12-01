@@ -139,10 +139,17 @@ class HeatMapColumn extends StatelessWidget {
         emptySpace = (numDays != 7)
             ? List.generate(
                 7 - numDays,
-                (i) => Container(
-                    margin: margin ?? const EdgeInsets.all(2),
-                    width: size ?? 42,
-                    height: size ?? 42),
+                (i) => HeatMapContainer(
+                  date: DateUtil.changeDay(startDate, i),
+                  backgroundColor: defaultColor,
+                  size: size,
+                  fontSize: fontSize,
+                  textColor: textColor,
+                  borderRadius: borderRadius,
+                  margin: margin,
+                  onClick: onClick,
+                  showText: showText,
+                ),
               )
             : [],
         super(key: key);
