@@ -64,6 +64,9 @@ class HeatMapCalendarPage extends StatelessWidget {
   /// Paratmeter gives clicked [DateTime] value.
   final Function(DateTime)? onClick;
 
+  /// The first day of the week.
+  final int? startWeekDay;
+
   HeatMapCalendarPage({
     Key? key,
     required this.baseDate,
@@ -79,7 +82,9 @@ class HeatMapCalendarPage extends StatelessWidget {
     this.colorsets,
     this.borderRadius,
     this.onClick,
-  })  : separatedDate = DateUtil.separatedMonthFixed(baseDate),
+    this.startWeekDay,
+  })  : separatedDate = DateUtil.separatedMonthFixed(
+            baseDate, startWeekDay ?? DateTime.sunday),
         maxValue = DatasetsUtil.getMaxValue(
             DatasetsUtil.filterMonth(datasets, baseDate)),
         super(key: key);
@@ -106,6 +111,7 @@ class HeatMapCalendarPage extends StatelessWidget {
             margin: margin,
             maxValue: maxValue,
             onClick: onClick,
+            startWeekDay: startWeekDay,
             datasets: Map.from(datasets ?? {})
               ..removeWhere(
                 (key, value) => !(key.isAfter(date.keys.first) &&
