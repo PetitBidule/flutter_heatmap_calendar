@@ -155,21 +155,12 @@ class _HeatMapCalendar extends State<HeatMapCalendar> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         // Previous month button.
-        Container(
-          alignment: Alignment.center,
-          width: 34,
-          height: 34,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: Colors.grey[400]!, width: 1),
+        IconButton(
+          icon: const Icon(
+            Icons.arrow_back_ios,
+            size: 14,
           ),
-          child: IconButton(
-            icon: const Icon(
-              Icons.arrow_back_ios,
-              size: 14,
-            ),
-            onPressed: () => changeMonth(-1),
-          ),
+          onPressed: () => changeMonth(-1),
         ),
 
         // Text which shows the current year and month
@@ -181,21 +172,12 @@ class _HeatMapCalendar extends State<HeatMapCalendar> {
         ),
 
         // Next month button.
-        Container(
-          width: 34,
-          height: 34,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-            // color: Colors.grey[300],
-            border: Border.all(color: Colors.grey[400]!, width: 1),
+        IconButton(
+          icon: const Icon(
+            Icons.arrow_forward_ios,
+            size: 14,
           ),
-          child: IconButton(
-            icon: const Icon(
-              Icons.arrow_forward_ios,
-              size: 14,
-            ),
-            onPressed: () => changeMonth(1),
-          ),
+          onPressed: () => changeMonth(1),
         ),
       ],
     );
