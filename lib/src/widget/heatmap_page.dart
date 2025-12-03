@@ -75,6 +75,9 @@ class HeatMapPage extends StatelessWidget {
 
   final bool? showText;
 
+  /// The color value of the current day of every blocks
+  final Color? currentDayColor;
+
   HeatMapPage({
     Key? key,
     required this.colorMode,
@@ -90,6 +93,7 @@ class HeatMapPage extends StatelessWidget {
     this.onClick,
     this.margin,
     this.showText,
+    this.currentDayColor,
   })  : _dateDifferent = endDate.difference(startDate).inDays,
         maxValue = DatasetsUtil.getMaxValue(datasets),
         super(key: key);
@@ -114,6 +118,7 @@ class HeatMapPage extends StatelessWidget {
         // To make empty space to future day, we have to pass this HeatMapPage's
         // endDate to HeatMapColumn's endDate.
         startDate: _firstDay,
+        currentDayColor: currentDayColor,
         endDate: datePos <= _dateDifferent - 7
             ? DateUtil.changeDay(startDate, datePos + 6)
             : endDate,

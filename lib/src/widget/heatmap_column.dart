@@ -73,6 +73,9 @@ class HeatMapColumn extends StatelessWidget {
   // current week.
   final int numDays;
 
+  /// The color value of the current day of every blocks
+  final Color? currentDayColor;
+
   HeatMapColumn({
     Key? key,
     required this.startDate,
@@ -90,6 +93,7 @@ class HeatMapColumn extends StatelessWidget {
     this.onClick,
     this.maxValue,
     this.showText,
+    this.currentDayColor,
   })  :
         // Init list.
         dayContainers = List.generate(
@@ -104,6 +108,7 @@ class HeatMapColumn extends StatelessWidget {
             margin: margin,
             onClick: onClick,
             showText: showText,
+            currentDayColor: currentDayColor,
             // If datasets has DateTime key which is equal to this HeatMapContainer's date,
             // we have to color the matched HeatMapContainer.
             //

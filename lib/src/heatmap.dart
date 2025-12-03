@@ -87,6 +87,9 @@ class HeatMap extends StatefulWidget {
   /// The double value of [HeatMapColorTip]'s tip container's size.
   final double? colorTipSize;
 
+  /// The color value of the current day of every blocks
+  final Color? currentDayColor;
+
   const HeatMap({
     Key? key,
     required this.colorsets,
@@ -107,6 +110,7 @@ class HeatMap extends StatefulWidget {
     this.colorTipHelper,
     this.colorTipCount,
     this.colorTipSize,
+    this.currentDayColor,
   }) : super(key: key);
 
   @override
@@ -132,6 +136,7 @@ class _HeatMap extends State<HeatMap> {
       children: <Widget>[
         // Heatmap Widget.
         _scrollableHeatMap(HeatMapPage(
+          currentDayColor: widget.currentDayColor,
           endDate: widget.endDate ?? DateTime.now(),
           startDate: widget.startDate ??
               DateUtil.oneYearBefore(widget.endDate ?? DateTime.now()),

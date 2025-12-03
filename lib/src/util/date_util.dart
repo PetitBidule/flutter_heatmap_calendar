@@ -62,6 +62,7 @@ class DateUtil {
   static List<Map<DateTime, DateTime>> separatedMonthFixed(
       final DateTime referenceDate, final int startWeekDay) {
     DateTime startDate = startDayOfMonth(referenceDate);
+
     int dayOffset = (startDate.weekday - startWeekDay + 7) % 7;
     DateTime endDate = DateTime(startDate.year, startDate.month,
         startDate.day + DAYS_IN_WEEK - dayOffset - 1);
